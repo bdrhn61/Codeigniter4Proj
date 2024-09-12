@@ -25,12 +25,12 @@
 
 <div class="tabs-container">
   <button onclick="openTab('London')" class="tab">Ürün Ekle</button>
-  <button onclick="openTab('Paris')" class="tab">Listele ve Düzenle</button>
+  <button onclick="openTab('EkleDuzenle')" class="tab">Listele ve Düzenle</button>
 
 </div>
 
 <div id="London" class="tabcontent"></div>
-<div id="Paris" class="tabcontent"></div>
+<div id="EkleDuzenle" class="tabcontent"></div>
 
 <?php if (isset($error)): ?>
     <div style="color: red;">

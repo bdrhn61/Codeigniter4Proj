@@ -26,7 +26,7 @@ class Home extends BaseController
 
     if ($image && $image->isValid() && !$image->hasMoved()) {
        
-         $newName = $image->getName(); // Orijinal dosya adını alın
+         $newName = $image->getName(); 
          $image->move(FCPATH . 'public/uploads', name: $newName);
          $imageUrl = base_url('project-root/public/uploads/' . $newName);
       
@@ -58,7 +58,6 @@ class Home extends BaseController
                
             ];
     
-            // Veritabanına ekleyin
             $this->model->insert($data);
             echo "Ürün başarıyla eklendi!";
         } catch (\Exception $e) {
@@ -74,7 +73,7 @@ class Home extends BaseController
         $model = new ProductModel();
 
         try {
-            $products = $model->findAll(); // Tüm ürünleri al
+            $products = $model->findAll(); 
 
             if (!$products) {
                 throw new \Exception('Veriler getirilemedi.');
@@ -82,11 +81,11 @@ class Home extends BaseController
 
             $data['products'] = $products;
             
-            return view('Paris', $data); 
+            return view('EkleDuzenle', $data); 
         } catch (\Exception $e) {
          
             $data['error'] = $e->getMessage();
-            return view('Paris', $data);
+            return view('EkleDuzenle', $data);
         }  
     }
 
@@ -96,10 +95,10 @@ class Home extends BaseController
     public function update($id): ResponseInterface
 {
     $model = new ProductModel();
-    $data = $this->request->getJSON(); // JSON veri al
+    $data = $this->request->getJSON(); 
 
     if (!$data) {
-        return $this->response->setStatusCode(400, 'Geçersiz veri'); // Hatalı veri durumunda
+        return $this->response->setStatusCode(400, 'Geçersiz veri'); 
     }
 
     $updateData = [
@@ -121,9 +120,9 @@ class Home extends BaseController
     ];
 
     if ($model->update($id, $updateData)) {
-        return $this->response->setStatusCode(200, 'Güncelleme başarılı'); // Başarı durumu
+        return $this->response->setStatusCode(200, 'Güncelleme başarılı'); 
     } else {
-        return $this->response->setStatusCode(500, 'Güncelleme başarısız'); // Hata durumu
+        return $this->response->setStatusCode(500, 'Güncelleme başarısız'); 
     }
 }
 
@@ -132,7 +131,7 @@ public function delete($id)
 {
     $model = new ProductModel();
     
-    if ($model->delete($id)) { // Ürünü veri tabanından sil
+    if ($model->delete($id)) { 
         return $this->response->setJSON(['success' => true]);
     } else {
         return $this->response->setJSON(['success' => false]);
